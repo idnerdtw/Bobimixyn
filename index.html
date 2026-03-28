@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
@@ -33,156 +32,197 @@
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans p-4 antialiased selection:bg-green-200">
 
-```
-<div class="max-w-md mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-green-100">
-    <div class="bg-green-600 text-white p-4 text-center">
-        <h1 class="text-xl font-bold tracking-wider">Bobimixyn 劑量計算器</h1>
-        <p class="text-sm opacity-80 mt-1">Polymyxin B Sulfate (完全免打字版)</p>
-    </div>
-
-    <div class="p-6 space-y-6">
-        <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">生理性別 (用於計算 ABW)</label>
-            <div class="flex space-x-2">
-                <button id="btn-male" onclick="setGender('male')" class="flex-1 py-2 px-4 rounded-lg bg-green-500 text-white font-semibold transition-colors shadow-sm">男性</button>
-                <button id="btn-female" onclick="setGender('female')" class="flex-1 py-2 px-4 rounded-lg bg-gray-200 text-gray-600 font-semibold transition-colors shadow-sm">女性</button>
-            </div>
+    <div class="max-w-md mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-green-100">
+        <div class="bg-green-600 text-white p-4 text-center">
+            <h1 class="text-xl font-bold tracking-wider">Bobimixyn 劑量計算器</h1>
+            <p class="text-sm opacity-80 mt-1">Polymyxin B Sulfate (完全免打字版)</p>
         </div>
 
-        <div>
-            <div class="flex justify-between items-end mb-2">
-                <label class="block text-sm font-medium text-gray-700">身高 (Height)</label>
-                <span class="text-2xl font-bold text-green-600"><span id="height-val">170</span> cm</span>
-            </div>
-            <input type="range" id="height-slider" min="140" max="200" value="170" step="1" oninput="updateCalculations()">
-        </div>
-
-        <div>
-            <div class="flex justify-between items-end mb-2">
-                <label class="block text-sm font-medium text-gray-700">實際體重 (TBW)</label>
-                <span class="text-2xl font-bold text-green-600"><span id="weight-val">60</span> kg</span>
-            </div>
-            <input type="range" id="weight-slider" min="30" max="120" value="60" step="1" oninput="updateCalculations()">
-        </div>
-
-        <div id="alert-box" class="hidden bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-md text-sm text-yellow-800"></div>
-
-        <hr class="border-gray-200">
-
-        <div class="space-y-4">
-            <div class="bg-green-50 rounded-xl p-4 border border-green-100">
-                <h2 class="text-green-800 font-bold mb-2 flex items-center">
-                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    起始劑量 (Loading Dose)
-                </h2>
-                <p class="text-xs text-green-600 mb-2">2.5 mg/kg (以實際體重計算) · 輸注 > 2 hr</p>
-                <div class="flex justify-between items-baseline">
-                    <span class="text-3xl font-black text-gray-800" id="load-vial">3.0 <span class="text-lg font-medium text-gray-500">vial</span></span>
-                    <div class="text-right">
-                        <div class="font-bold text-gray-700" id="load-mg">150 mg</div>
-                        <div class="text-sm text-gray-500" id="load-ku">1,500 KU</div>
-                    </div>
+        <div class="p-6 space-y-6">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">生理性別 (用於計算 ABW)</label>
+                <div class="flex space-x-2">
+                    <button id="btn-male" onclick="setGender('male')" class="flex-1 py-2 px-4 rounded-lg bg-green-500 text-white font-semibold transition-colors shadow-sm">男性</button>
+                    <button id="btn-female" onclick="setGender('female')" class="flex-1 py-2 px-4 rounded-lg bg-gray-200 text-gray-600 font-semibold transition-colors shadow-sm">女性</button>
                 </div>
             </div>
 
-            <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                <h2 class="text-blue-800 font-bold mb-2 flex items-center">
-                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    維持劑量 (Maintenance Dose)
-                </h2>
-                <p class="text-xs text-blue-600 mb-2">1.5 mg/kg q12h · 輸注 > 1 hr (首劑於Loading後12hr給予)</p>
-                <div class="flex justify-between items-baseline">
-                    <span class="text-3xl font-black text-gray-800" id="maint-vial">1.8 <span class="text-lg font-medium text-gray-500">vial</span></span>
-                    <div class="text-right">
-                        <div class="font-bold text-gray-700" id="maint-mg">90 mg</div>
-                        <div class="text-sm text-gray-500" id="maint-ku">900 KU</div>
+            <div>
+                <div class="flex justify-between items-end mb-2">
+                    <label class="block text-sm font-medium text-gray-700">身高 (Height)</label>
+                    <span class="text-2xl font-bold text-green-600"><span id="height-val">170</span> cm</span>
+                </div>
+                <input type="range" id="height-slider" min="140" max="200" value="170" step="1" oninput="updateCalculations()">
+            </div>
+
+            <div>
+                <div class="flex justify-between items-end mb-2">
+                    <label class="block text-sm font-medium text-gray-700">實際體重 (TBW)</label>
+                    <span class="text-2xl font-bold text-green-600"><span id="weight-val">60</span> kg</span>
+                </div>
+                <input type="range" id="weight-slider" min="30" max="120" value="60" step="1" oninput="updateCalculations()">
+            </div>
+
+            <!-- 體重資訊區塊 -->
+            <div class="bg-gray-50 rounded-xl p-4 border border-gray-200 text-sm space-y-2">
+                <h3 class="font-semibold text-gray-600 text-xs uppercase tracking-wide">體重參數</h3>
+                <div class="grid grid-cols-3 gap-2 text-center">
+                    <div>
+                        <div class="text-xs text-gray-400">TBW</div>
+                        <div class="font-bold text-gray-700" id="disp-tbw">60 kg</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-400">IBW</div>
+                        <div class="font-bold text-gray-700" id="disp-ibw">— kg</div>
+                    </div>
+                    <div>
+                        <div class="text-xs text-gray-400">ABW</div>
+                        <div class="font-bold text-gray-700" id="disp-abw">— kg</div>
+                    </div>
+                </div>
+                <div class="text-xs text-gray-400 pt-1 border-t border-gray-200">
+                    IBW: Devine formula　ABW = IBW + 0.4 × (TBW − IBW)
+                </div>
+                <div id="dose-weight-note" class="text-xs font-medium text-green-700 hidden"></div>
+            </div>
+
+            <div id="alert-box" class="hidden bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded-md text-sm text-yellow-800"></div>
+
+            <hr class="border-gray-200">
+
+            <div class="space-y-4">
+                <div class="bg-green-50 rounded-xl p-4 border border-green-100">
+                    <h2 class="text-green-800 font-bold mb-2 flex items-center">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        起始劑量 (Loading Dose)
+                    </h2>
+                    <p class="text-xs text-green-600 mb-2">2.5 mg/kg (以實際體重計算) · 輸注 > 2 hr</p>
+                    <div class="flex justify-between items-baseline">
+                        <span class="text-3xl font-black text-gray-800" id="load-vial">3.0 <span class="text-lg font-medium text-gray-500">vial</span></span>
+                        <div class="text-right">
+                            <div class="font-bold text-gray-700" id="load-mg">150 mg</div>
+                            <div class="text-sm text-gray-500" id="load-ku">1,500 KU</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+                    <h2 class="text-blue-800 font-bold mb-2 flex items-center">
+                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        維持劑量 (Maintenance Dose)
+                    </h2>
+                    <p class="text-xs text-blue-600 mb-2">1.5 mg/kg q12h · 輸注 > 1 hr (首劑於Loading後12hr給予)</p>
+                    <div class="flex justify-between items-baseline">
+                        <span class="text-3xl font-black text-gray-800" id="maint-vial">1.8 <span class="text-lg font-medium text-gray-500">vial</span></span>
+                        <div class="text-right">
+                            <div class="font-bold text-gray-700" id="maint-mg">90 mg</div>
+                            <div class="text-sm text-gray-500" id="maint-ku">900 KU</div>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            <div class="text-xs text-gray-400 space-y-1 mt-2 border-t border-gray-100 pt-3">
+                <p><strong class="text-gray-500">劑量調整邏輯：</strong></p>
+                <p>・Loading Dose：一律使用 <strong>TBW</strong></p>
+                <p>・Maintenance Dose：BMI &lt; 30 用 <strong>TBW</strong>；BMI ≥ 30 改用 <strong>ABW</strong></p>
+                <p>・Maintenance 上限：125 mg (2.5 vial) / q12h</p>
+                <p class="pt-1">肝腎不全、ECMO、CRRT 等無須調整劑量。每支 = 50 mg = 500 KU</p>
+            </div>
         </div>
-        
-        <p class="text-xs text-gray-400 text-center mt-4">肝腎不全、ECMO、CRRT 等無須調整劑量。每支 = 50mg</p>
     </div>
-</div>
 
-<script>
-    let currentGender = 'male';
+    <script>
+        let currentGender = 'male';
 
-    function setGender(gender) {
-        currentGender = gender;
-        if (gender === 'male') {
-            document.getElementById('btn-male').className = "flex-1 py-2 px-4 rounded-lg bg-green-500 text-white font-semibold transition-colors shadow-sm";
-            document.getElementById('btn-female').className = "flex-1 py-2 px-4 rounded-lg bg-gray-200 text-gray-600 font-semibold transition-colors shadow-sm";
-        } else {
-            document.getElementById('btn-female').className = "flex-1 py-2 px-4 rounded-lg bg-green-500 text-white font-semibold transition-colors shadow-sm";
-            document.getElementById('btn-male').className = "flex-1 py-2 px-4 rounded-lg bg-gray-200 text-gray-600 font-semibold transition-colors shadow-sm";
+        function setGender(gender) {
+            currentGender = gender;
+            if (gender === 'male') {
+                document.getElementById('btn-male').className = "flex-1 py-2 px-4 rounded-lg bg-green-500 text-white font-semibold transition-colors shadow-sm";
+                document.getElementById('btn-female').className = "flex-1 py-2 px-4 rounded-lg bg-gray-200 text-gray-600 font-semibold transition-colors shadow-sm";
+            } else {
+                document.getElementById('btn-female').className = "flex-1 py-2 px-4 rounded-lg bg-green-500 text-white font-semibold transition-colors shadow-sm";
+                document.getElementById('btn-male').className = "flex-1 py-2 px-4 rounded-lg bg-gray-200 text-gray-600 font-semibold transition-colors shadow-sm";
+            }
+            updateCalculations();
         }
+
+        function updateCalculations() {
+            const heightCm = parseFloat(document.getElementById('height-slider').value);
+            const weightKg = parseFloat(document.getElementById('weight-slider').value);
+            
+            document.getElementById('height-val').innerText = heightCm;
+            document.getElementById('weight-val').innerText = weightKg;
+
+            const heightM = heightCm / 100;
+            const bmi = weightKg / (heightM * heightM);
+
+            let ibw = 0;
+            if (currentGender === 'male') {
+                ibw = 50 + 0.91 * (heightCm - 152.4);
+            } else {
+                ibw = 45.5 + 0.91 * (heightCm - 152.4);
+            }
+
+            const abw = ibw + 0.4 * (weightKg - ibw);
+
+            let alertHtml = '';
+            let alertBox = document.getElementById('alert-box');
+
+            const loadMg = weightKg * 2.5;
+            const loadVial = loadMg / 50;
+            const loadKu = loadMg * 10;
+
+            let maintDoseWeight = weightKg;
+            let isBMIOver30 = bmi >= 30;
+
+            if (isBMIOver30) {
+                maintDoseWeight = abw;
+                alertHtml += `<strong>⚠️ BMI ≥ 30 (${bmi.toFixed(1)}):</strong> 維持劑量已自動改用 ABW (${abw.toFixed(1)} kg) 計算。<br>`;
+            }
+
+            let maintMg = maintDoseWeight * 1.5;
+            
+            if (maintMg > 125) {
+                maintMg = 125;
+                alertHtml += `<strong>⚠️ 達最大劑量上限:</strong> 維持劑量已限制在最大值 125mg (2.5 vial) / q12h。`;
+            }
+
+            const maintVial = maintMg / 50;
+            const maintKu = maintMg * 10;
+
+            // 更新體重參數顯示
+            document.getElementById('disp-tbw').innerText = `${weightKg} kg`;
+            document.getElementById('disp-ibw').innerText = `${ibw.toFixed(1)} kg`;
+            document.getElementById('disp-abw').innerText = `${abw.toFixed(1)} kg`;
+
+            // 顯示實際使用的劑量體重
+            const noteEl = document.getElementById('dose-weight-note');
+            if (isBMIOver30) {
+                noteEl.innerHTML = `📌 Maintenance 使用 ABW <strong>${abw.toFixed(1)} kg</strong>（BMI ${bmi.toFixed(1)} ≥ 30）`;
+                noteEl.classList.remove('hidden');
+            } else {
+                noteEl.innerHTML = `📌 Maintenance 使用 TBW <strong>${weightKg} kg</strong>（BMI ${bmi.toFixed(1)} &lt; 30）`;
+                noteEl.classList.remove('hidden');
+            }
+
+            if (alertHtml !== '') {
+                alertBox.innerHTML = alertHtml;
+                alertBox.classList.remove('hidden');
+            } else {
+                alertBox.classList.add('hidden');
+            }
+
+            document.getElementById('load-vial').innerHTML = `${loadVial.toFixed(2)} <span class="text-lg font-medium text-gray-500">vial</span>`;
+            document.getElementById('load-mg').innerText = `${Math.round(loadMg)} mg`;
+            document.getElementById('load-ku').innerText = `${Math.round(loadKu).toLocaleString()} KU`;
+
+            document.getElementById('maint-vial').innerHTML = `${maintVial.toFixed(2)} <span class="text-lg font-medium text-gray-500">vial</span>`;
+            document.getElementById('maint-mg').innerText = `${Math.round(maintMg)} mg`;
+            document.getElementById('maint-ku').innerText = `${Math.round(maintKu).toLocaleString()} KU`;
+        }
+
         updateCalculations();
-    }
-
-    function updateCalculations() {
-        const heightCm = parseFloat(document.getElementById('height-slider').value);
-        const weightKg = parseFloat(document.getElementById('weight-slider').value);
-        
-        document.getElementById('height-val').innerText = heightCm;
-        document.getElementById('weight-val').innerText = weightKg;
-
-        const heightM = heightCm / 100;
-        const bmi = weightKg / (heightM * heightM);
-
-        let ibw = 0;
-        if (currentGender === 'male') {
-            ibw = 50 + 0.91 * (heightCm - 152.4);
-        } else {
-            ibw = 45.5 + 0.91 * (heightCm - 152.4);
-        }
-
-        const abw = ibw + 0.4 * (weightKg - ibw);
-
-        let alertHtml = '';
-        let alertBox = document.getElementById('alert-box');
-
-        const loadMg = weightKg * 2.5;
-        const loadVial = loadMg / 50;
-        const loadKu = loadMg * 10;
-
-        let maintDoseWeight = weightKg;
-        let isBMIOver30 = bmi >= 30;
-
-        if (isBMIOver30) {
-            maintDoseWeight = abw;
-            alertHtml += `<strong>⚠️ BMI ≥ 30 (${bmi.toFixed(1)}):</strong> 維持劑量已自動改用 ABW (${abw.toFixed(1)} kg) 計算。<br>`;
-        }
-
-        let maintMg = maintDoseWeight * 1.5;
-        
-        if (maintMg > 125) {
-            maintMg = 125;
-            alertHtml += `<strong>⚠️ 達最大劑量上限:</strong> 維持劑量已限制在最大值 125mg (2.5 vial) / q12h。`;
-        }
-
-        const maintVial = maintMg / 50;
-        const maintKu = maintMg * 10;
-
-        if (alertHtml !== '') {
-            alertBox.innerHTML = alertHtml;
-            alertBox.classList.remove('hidden');
-        } else {
-            alertBox.classList.add('hidden');
-        }
-
-        document.getElementById('load-vial').innerHTML = `${loadVial.toFixed(2)} <span class="text-lg font-medium text-gray-500">vial</span>`;
-        document.getElementById('load-mg').innerText = `${Math.round(loadMg)} mg`;
-        document.getElementById('load-ku').innerText = `${Math.round(loadKu).toLocaleString()} KU`;
-
-        document.getElementById('maint-vial').innerHTML = `${maintVial.toFixed(2)} <span class="text-lg font-medium text-gray-500">vial</span>`;
-        document.getElementById('maint-mg').innerText = `${Math.round(maintMg)} mg`;
-        document.getElementById('maint-ku').innerText = `${Math.round(maintKu).toLocaleString()} KU`;
-    }
-
-    updateCalculations();
-</script>
-```
-
+    </script>
 </body>
 </html>
