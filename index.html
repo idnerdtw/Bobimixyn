@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#16a34a">
-  <title>Bobimixyn 動態劑量計算器 v260618B</title>
-  <!-- Bobimixyn v260618B: repaired standalone build, responsive range controls, larger typography -->
+  <title>Bobimixyn 動態劑量計算器 v260618C</title>
+  <!-- Bobimixyn v260618C: expanded tablet/desktop layout while preserving the mobile experience -->
   <style>
     :root {
       --green: #16a34a;
@@ -57,7 +57,7 @@
     }
 
     .app {
-      width: min(100%, 860px);
+      width: min(100%, 1080px);
       overflow: hidden;
       background: var(--surface);
       border: 1px solid #dfe7e3;
@@ -102,6 +102,7 @@
       line-height: 1.25;
       font-weight: 800;
       letter-spacing: 0.2px;
+      word-break: keep-all;
     }
 
     .subtitle {
@@ -126,7 +127,7 @@
 
     .workspace {
       display: grid;
-      grid-template-columns: minmax(310px, 0.95fr) minmax(390px, 1.25fr);
+      grid-template-columns: minmax(365px, 0.92fr) minmax(495px, 1.28fr);
     }
 
     .controls,
@@ -506,11 +507,103 @@
       font-size: 14px;
     }
 
-    @media (max-width: 760px) {
-      .page { padding: 14px 10px 20px; }
-      .app { border-radius: 16px; }
+    /* Larger, roomier presentation for landscape tablets and desktop browsers. */
+    @media (min-width: 961px) {
+      .page {
+        padding: max(30px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(38px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+      }
+
+      .app {
+        border-radius: 22px;
+        box-shadow: 0 22px 60px -28px rgba(20, 60, 40, 0.38);
+      }
+
+      .app-header { padding: 24px 32px; }
+      .brand { gap: 14px; }
+      .brand-icon { width: 42px; height: 42px; border-radius: 11px; }
+      .brand-icon svg { width: 23px; height: 23px; }
+      h1 { font-size: 23px; }
+      .subtitle { font-size: 14px; }
+      .version-badge { padding: 6px 12px; font-size: 13px; }
+
+      .controls,
+      .results { padding: 32px; }
+
+      .section-label { margin-bottom: 10px; font-size: 14px; }
+      .gender-switch { gap: 10px; margin-bottom: 28px; }
+      .gender-button { min-height: 48px; font-size: 16px; }
+      .range-field { margin-bottom: 25px; }
+      .range-heading label { font-size: 15.5px; }
+      .range-value { font-size: 31px; }
+      .range-value .unit { font-size: 14px; }
+      input[type="range"] { height: 46px; }
+      input[type="range"]::-webkit-slider-runnable-track { height: 10px; }
+      input[type="range"]::-webkit-slider-thumb { width: 32px; height: 32px; margin-top: -11px; }
+      input[type="range"]::-moz-range-track,
+      input[type="range"]::-moz-range-progress { height: 10px; }
+      input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; }
+      .range-scale { font-size: 12.5px; }
+
+      .weight-cell { padding: 14px 7px; }
+      .weight-name { font-size: 12.5px; }
+      .weight-number { font-size: 17px; }
+      .formula-note { padding: 11px 13px; font-size: 12.5px; }
+      .dose-weight-note { margin-top: 12px; font-size: 13.5px; }
+
+      .results { gap: 18px; }
+      .dose-card { padding: 19px 0 18px; }
+      .dose-heading { margin-bottom: 15px; }
+      .dose-title { font-size: 17.5px; }
+      .dose-regimen { font-size: 13px; }
+      .dose-values { gap: 14px; }
+      .metric-label { font-size: 12.5px; }
+      .metric-value { font-size: 18.5px; }
+      .dose-metric:first-child .metric-value { font-size: 34px; }
+      .metric-unit { font-size: 14px; }
+      .dose-detail { margin-top: 13px; font-size: 13px; }
+      .alert-box { padding: 14px 15px; font-size: 13.5px; }
+      .logic-notes { padding-top: 15px; font-size: 13px; line-height: 1.75; }
+      .disclaimer { padding: 18px 32px 20px; font-size: 13px; }
+      .disclaimer-title { font-size: 13.5px; }
+    }
+
+    /* Portrait tablets use a spacious single-column layout instead of a cramped split view. */
+    @media (max-width: 960px) {
       .workspace { grid-template-columns: 1fr; }
       .controls { border-right: 0; border-bottom: 1px solid #edf1ef; }
+    }
+
+    @media (min-width: 601px) and (max-width: 960px) {
+      .page {
+        padding: max(24px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(30px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+      }
+
+      .app { width: min(100%, 780px); }
+      .app-header { padding: 22px 28px; }
+      .brand-icon { width: 40px; height: 40px; }
+      h1 { font-size: 22px; }
+      .subtitle { font-size: 13.5px; }
+      .version-badge { font-size: 13px; }
+      .controls,
+      .results { padding: 28px 30px; }
+      .section-label { font-size: 13.5px; }
+      .gender-button { min-height: 46px; font-size: 15.5px; }
+      .range-heading label { font-size: 15px; }
+      .range-value { font-size: 30px; }
+      .weight-number { font-size: 16.5px; }
+      .results { gap: 18px; }
+      .dose-title { font-size: 17px; }
+      .dose-regimen { font-size: 13px; }
+      .metric-value { font-size: 18px; }
+      .dose-metric:first-child .metric-value { font-size: 32px; }
+      .dose-detail,
+      .logic-notes { font-size: 13px; }
+      .disclaimer { padding: 17px 30px 19px; font-size: 13px; }
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 14px 10px 20px; }
+      .app { border-radius: 16px; }
       .controls, .results { padding: 22px; }
     }
 
@@ -556,7 +649,7 @@
             <p class="subtitle">Polymyxin B Sulfate · 動態劑量</p>
           </div>
         </div>
-        <span class="version-badge" aria-label="版本 v260618B">v260618B</span>
+        <span class="version-badge" aria-label="版本 v260618C">v260618C</span>
       </header>
 
       <div class="workspace">
@@ -673,7 +766,7 @@
         <p class="disclaimer-title">⚠️ 免責聲明 / Disclaimer</p>
         <p>本工具僅供醫療專業人員參考使用，計算結果不得取代臨床判斷、正式醫囑或藥師核對。實際給藥劑量應由具執照之醫師或藥師依個別病人狀況決定，本工具作者及開發者對因使用本工具所致之任何醫療決策後果不承擔任何法律責任。</p>
         <p>This tool is intended for use by qualified healthcare professionals as a reference only. Results do not substitute for clinical judgment, formal prescribing decisions, or pharmacist verification. Actual dosing must be determined by a licensed physician or pharmacist based on individual patient circumstances. The authors and developers accept no liability for any clinical outcomes resulting from the use of this tool.</p>
-        <p class="footer-version"><strong>版本：</strong>v260618B</p>
+        <p class="footer-version"><strong>版本：</strong>v260618C</p>
       </footer>
 
       <noscript><div class="noscript">此計算器需要啟用 JavaScript 才能更新劑量。</div></noscript>
@@ -684,7 +777,7 @@
     (() => {
       'use strict';
 
-      const APP_VERSION = 'v260618B';
+      const APP_VERSION = 'v260618C';
       const MG_PER_VIAL = 50;
       const KU_PER_MG = 10;
       const PRACTICAL_DOSE_STEP_MG = 5;
